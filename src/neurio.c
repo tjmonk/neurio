@@ -101,6 +101,9 @@ typedef struct neurioState
     /*! Neurio sensor basic authentication */
     char *auth;
 
+    /*! Polling Interval (seconds) */
+    uint16_t polling_interval;
+
     /*! curl receive buffer */
     RxBuffer rxbuf;
 
@@ -206,6 +209,9 @@ void main(int argc, char **argv)
     /* initialize the neurio state object */
     state.address = ADDRESS;
 
+    /* intialize the polling interval */
+    state.polling_interval = 1;
+
     if( argc < 2 )
     {
         usage( argv[0] );
@@ -235,7 +241,7 @@ void main(int argc, char **argv)
 
             while( state.running )
             {
-                sleep(1);
+                sleep(state.polling_interval);
                 QueryNeurio(&state);
 
                 neurio = JSON_ProcessBuffer( state.rxbuf.p );
@@ -270,11 +276,13 @@ static void usage( char *cmdname )
     if( cmdname != NULL )
     {
         fprintf(stderr,
-                "usage: %s [-v] [-h] [-u address] [-a basic auth]\n"
+                "usage: %s [-v] [-h] [-a address] [-u basic user auth]"
+                " [-p seconds]\n"
                 "-v : verbose mode\n"
                 "-h : display this help\n"
-                "-u : neurio sensor IP address\n"
-                "-a : neurio basic auth\n",
+                "-a : neurio sensor IP address\n"
+                "-u : neurio basic user auth\n"
+                "-p : polling rate (seconds)\n",
                 cmdname );
     }
 }
@@ -307,7 +315,7 @@ static int ProcessOptions( int argC, char *argV[], NeurioState *pState )
 {
     int c;
     int result = EINVAL;
-    const char *options = "hvu:a:";
+    const char *options = "hvu:a:p:";
 
     if( ( pState != NULL ) &&
         ( argV != NULL ) )
@@ -321,11 +329,15 @@ static int ProcessOptions( int argC, char *argV[], NeurioState *pState )
                     break;
 
                 case 'u':
-                    pState->address = optarg;
+                    pState->auth = optarg;
                     break;
 
                 case 'a':
-                    pState->auth = optarg;
+                    pState->address = optarg;
+                    break;
+
+                case 'p':
+                    pState->polling_interval = atoi(optarg);
                     break;
 
                 case 'h':
@@ -342,7 +354,6 @@ static int ProcessOptions( int argC, char *argV[], NeurioState *pState )
 
     return 0;
 }
-
 
 /*============================================================================*/
 /*  SetupTerminationHandler                                                   */
