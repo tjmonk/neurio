@@ -59,14 +59,14 @@ The iothub service requires the following components:
 varserver &
 
 mkvar -t float -n /consumption/l1/v
-mkvar -t uint16 -n /comsumption/l1/p
+mkvar -t uint16 -n /consumption/l1/p
 mkvar -t int16 -n /consumption/l1/q
 mkvar -t uint64 -n /consumption/l1/energy_imp
 mkvar -t float -n /consumption/l2/v
-mkvar -t uint16 -n /comsumption/l2/p
+mkvar -t uint16 -n /consumption/l2/p
 mkvar -t int16 -n /consumption/l2/q
 mkvar -t uint64 -n /consumption/l2/energy_imp
-mkvar -t uint16 -n /comsumption/total/p
+mkvar -t uint16 -n /consumption/total/p
 mkvar -t int16 -n /consumption/total/q
 mkvar -t uint64 -n /consumption/total/energy_imp
 
@@ -85,15 +85,15 @@ vars -vn /CONSUMPTION/
 ```
 
 ```
-/consumption/l1/v=118.841003
-/consumption/l1/q=28
-/consumption/l1/q=28
-/consumption/l1/energy_imp=100212000485
-/consumption/l2/v=119.796997
-/consumption/l2/q=-79
-/consumption/l2/q=-79
-/consumption/l2/energy_imp=69174964343
-/consumption/total/q=-51
-/consumption/total/q=-51
-/consumption/total/energy_imp=169386964852
+/consumption/l1/v=119.497002
+/consumption/l1/p=359
+/consumption/l1/q=-117
+/consumption/l1/energy_imp=100227460449
+/consumption/l2/v=119.348999
+/consumption/l2/p=262
+/consumption/l2/q=-49
+/consumption/l2/energy_imp=69186339532
+/consumption/total/p=621
+/consumption/total/q=-166
+/consumption/total/energy_imp=169413800005
 ```
