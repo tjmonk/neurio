@@ -712,6 +712,7 @@ static int NeurioStatus( NeurioState *pState, JNode *pNode )
     int result = EINVAL;
     JArray *channels;
     char *pSensorId;
+    VarObject obj;
 
     if ( ( pState != NULL ) && ( pNode != NULL ) )
     {
@@ -726,22 +727,22 @@ static int NeurioStatus( NeurioState *pState, JNode *pNode )
         /* Line 1 Real Power */
         VAR_Set( pState->hVarServer,
                  pState->hL1P,
-                 JSON_GetVar( pNode, "p_W" ) );
+                 (VarObject *)JSON_GetVar( pNode, "p_W" ) );
 
         /* Line 1 Reactive Power */
         VAR_Set( pState->hVarServer,
                  pState->hL1Q,
-                 JSON_GetVar( pNode, "q_VAR" ) );
+                 (VarObject *)JSON_GetVar( pNode, "q_VAR" ) );
 
         /* Line 1 Voltage */
         VAR_Set( pState->hVarServer,
                  pState->hL1V,
-                 JSON_GetVar( pNode, "v_V" ) );
+                 (VarObject *)JSON_GetVar( pNode, "v_V" ) );
 
         /* Line 1 Consumption in Watt-Seconds */
         VAR_Set( pState->hVarServer,
                  pState->hL1EIn,
-                 JSON_GetVar( pNode, "eImp_Ws" ) );
+                 (VarObject *)JSON_GetVar( pNode, "eImp_Ws" ) );
 
         /* Line 2 Data */
 
@@ -750,22 +751,22 @@ static int NeurioStatus( NeurioState *pState, JNode *pNode )
         /* Line 2 Real Power */
         VAR_Set( pState->hVarServer,
                  pState->hL2P,
-                 JSON_GetVar( pNode, "p_W" ) );
+                 (VarObject *)JSON_GetVar( pNode, "p_W" ) );
 
         /* Line 2 Reactive Power */
         VAR_Set( pState->hVarServer,
                  pState->hL2Q,
-                 JSON_GetVar( pNode, "q_VAR" ) );
+                 (VarObject *)JSON_GetVar( pNode, "q_VAR" ) );
 
         /* Line 2 Voltage */
         VAR_Set( pState->hVarServer,
                  pState->hL2V,
-                 JSON_GetVar( pNode, "v_V" ) );
+                 (VarObject *)JSON_GetVar( pNode, "v_V" ) );
 
         /* Line 2 Consumption in Watt-Seconds */
         VAR_Set( pState->hVarServer,
                  pState->hL2EIn,
-                 JSON_GetVar( pNode, "eImp_Ws" ) );
+                 (VarObject *)JSON_GetVar( pNode, "eImp_Ws" ) );
 
         /* Total Power */
 
@@ -774,17 +775,17 @@ static int NeurioStatus( NeurioState *pState, JNode *pNode )
         /* Total Real Power */
         VAR_Set( pState->hVarServer,
                  pState->hTotP,
-                 JSON_GetVar( pNode, "p_W" ) );
+                 (VarObject *)JSON_GetVar( pNode, "p_W" ) );
 
         /* Total Reactive Power */
         VAR_Set( pState->hVarServer,
                  pState->hTotQ,
-                 JSON_GetVar( pNode, "q_VAR" ) );
+                 (VarObject *)JSON_GetVar( pNode, "q_VAR" ) );
 
         /* Total Consumption in Watt-Seconds */
         VAR_Set( pState->hVarServer,
                  pState->hTotEIn,
-                 JSON_GetVar( pNode, "eImp_Ws" ) );
+                 (VarObject *)JSON_GetVar( pNode, "eImp_Ws" ) );
 
         result = EOK;
     }
