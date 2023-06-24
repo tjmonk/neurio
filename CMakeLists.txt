@@ -8,9 +8,7 @@ project(neurio
 include(GNUInstallDirs)
 
 find_library ( LIB_RT rt REQUIRED )
-find_library ( LIB_VARSERVER varserver REQUIRED )
 find_library ( LIB_CURL curl REQUIRED )
-find_library ( LIB_TJSON tjson REQUIRED )
 
 add_executable( ${PROJECT_NAME}
 	src/neurio.c
@@ -18,9 +16,9 @@ add_executable( ${PROJECT_NAME}
 
 target_link_libraries( ${PROJECT_NAME}
     ${LIB_RT}
-    ${LIB_VARSERVER}
+    varserver
     ${LIB_CURL}
-    ${LIB_TJSON}
+    tjson
 )
 
 set_target_properties( ${PROJECT_NAME}
